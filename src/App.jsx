@@ -1,9 +1,13 @@
-import { useState } from 'react'
-import Authentication from '../src/auth/authentication.jsx'
-import './App.css'
+import { AuthProvider } from './context/AuthContext';
+import Authentication from './auth/authentication';
+import './App.css';
 
 function App() {
-  return <Authentication />
+  return (
+    <AuthProvider>
+      <Authentication />
+    </AuthProvider>
+  );
 }
 
-export default App
+export default App;
