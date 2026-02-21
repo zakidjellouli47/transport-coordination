@@ -29,9 +29,9 @@ export default function Authentication() {
         const response = await authService.login(formData.phone, formData.password);
         setSuccess(response.message);
         
-        // Redirect to dashboard after successful login
+        // Reload to show dashboard
         setTimeout(() => {
-          window.location.href = '/dashboard'; // Change to your dashboard route
+          window.location.reload();
         }, 1000);
       } else {
         // Register
@@ -52,9 +52,9 @@ export default function Authentication() {
 
         setSuccess(response.message);
         
-        // Redirect to dashboard after successful registration
+        // Reload to show dashboard
         setTimeout(() => {
-          window.location.href = '/dashboard'; // Change to your dashboard route
+          window.location.reload();
         }, 1000);
       }
     } catch (err) {
@@ -67,7 +67,7 @@ export default function Authentication() {
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
-    setError(''); // Clear error when user types
+    setError('');
   };
 
   return (
@@ -179,7 +179,7 @@ export default function Authentication() {
           )}
 
           {/* Form Fields */}
-          <form onSubmit={handleSubmit} className="px-6 pb-8 space-y-4">
+          <div className="px-6 pb-8 space-y-4">
             {/* Name Field (Registration Only) */}
             {!isLogin && (
               <div className="relative">
@@ -300,7 +300,8 @@ export default function Authentication() {
 
             {/* Submit Button */}
             <button
-              type="submit"
+              type="button"
+              onClick={handleSubmit}
               disabled={loading}
               className={`w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white py-3.5 rounded-xl font-semibold shadow-lg hover:shadow-xl hover:from-blue-600 hover:to-blue-700 transform hover:scale-[1.02] transition-all duration-300 ${
                 loading ? 'opacity-50 cursor-not-allowed' : ''
@@ -318,7 +319,7 @@ export default function Authentication() {
                 isLogin ? 'Login' : 'Create Account'
               )}
             </button>
-          </form>
+          </div>
         </div>
 
         {/* Footer Note */}
